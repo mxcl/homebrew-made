@@ -7,11 +7,14 @@ class SwiftSh < Formula
   bottle :disabled
    
   def install
-    system "swift", "build", 
+    args = ["swift", "build", 
       "--configuration", "release",
-      "-Xswiftc", "-static-stdlib",
-      "--disable-sandbox"
+      "--disable-sandbox"]
+    args += ["-Xswiftc", "-static-stdlib"] if OS.mac?
+
+    system *args
+
     bin.install '.build/release/swift-sh'
-    bin.install '.build/release/swift-sh-edit'
+    bin.install '.build/release/swift-sh-edit' if OS.mac?
   end
 end
