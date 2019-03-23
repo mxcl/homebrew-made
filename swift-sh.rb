@@ -10,11 +10,18 @@ class SwiftSh < Formula
     args = ["swift", "build", 
       "--configuration", "release",
       "--disable-sandbox"]
-    args += ["-Xswiftc", "-static-stdlib"] if OS.mac?
+    args += ["-Xswiftc", "-static-stdlib"] unless swift_abi_safe
 
     system *args
 
     bin.install '.build/release/swift-sh'
     bin.install '.build/release/swift-sh-edit' if OS.mac?
+  end
+
+  def swift_abi_safe
+    # Swift 5 is ABI safe since Xcode 10.2-beta3
+    return false unless OS.mac?
+    `swift --version` =~ /Swift version (\d+)\.\d+/
+    $1.to_i >= 5
   end
 end
