@@ -10,7 +10,7 @@ class SwiftSh < Formula
     args = ["swift", "build", 
       "--configuration", "release",
       "--disable-sandbox"]
-    args += ["-Xswiftc", "-static-stdlib"] unless swift_abi_safe
+    args += ["-Xswiftc", "-static-stdlib"] unless swift_abi_safe or OS.linux?
 
     system *args
 
