@@ -19,6 +19,7 @@ jobs:
       env: SWIFT_VERSION=4.2.4
       before_install: |
         curl "https://swift.org/builds/swift-$SWIFT_VERSION-release/ubuntu1604/swift-$SWIFT_VERSION-RELEASE/swift-$SWIFT_VERSION-RELEASE-ubuntu16.04.tar.gz" | sudo tar xz -C / --strip-components=1
+        sudo chmod a+r /usr/lib/swift/CoreFoundation/*
       install: |
         sudo apt-get install clang libicu-dev
       before_script: |
