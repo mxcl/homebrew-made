@@ -1,13 +1,13 @@
 class SwiftSh < Formula
   desc "Scripting with easy zero-conf dependency imports"
   homepage "https://github.com/mxcl/swift-sh"
-  url "https://github.com/mxcl/swift-sh/archive/1.14.1.tar.gz"
-  sha256 "d3d955e099cdb6e649892512ca6199d7a7e36f8c7c96773ccaa0f7fc2bd822e0"
+  url "https://github.com/mxcl/swift-sh/archive/1.14.2.tar.gz"
+  sha256 "09a7e6f85a9705b78d729e8d068c69e7f3a3d3ee31b7795286a75dd25845de83"
 
   bottle do
-    root_url "https://github.com/mxcl/swift-sh/releases/download/1.14.1"
+    root_url "https://github.com/mxcl/swift-sh/releases/download/1.14.2"
     cellar :any_skip_relocation
-    sha256 "eb76efeab146f81b7f2ae04e8d10071f0eb3adfb4afcab4b7979c73b7941934c" => :mojave
+    sha256 "6a8dacf03767e90fa0dd8a6dded5738ffc10ba710ab0bab1ad559539f6933a6f" => :mojave
   end
 
   def install
