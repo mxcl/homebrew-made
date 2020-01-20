@@ -6,27 +6,38 @@ jobs:
     - &macOS
       os: osx
       osx_image: xcode10.1
-      name: macOS / Swift 4.2.1
-      script: brew install ./swift-sh.rb
+      name: macOS 10.13.6 / Swift 4.2.1 / no-bottle
+      script:
+        - brew install ./swift-sh.rb
+        # Verify the resulting tool is functional
+        - swift sh <(curl https://raw.githubusercontent.com/mxcl/swift-sh/master/Examples/cards)
       env:
         - HOMEBREW_NO_AUTO_UPDATE=1
         - HOMEBREW_NO_INSTALL_CLEANUP=1
 
     - <<: *macOS
-      name: macOS / Swift 5.0.x
-      osx_image: xcode10.2
+      name: macOS 10.14.4 / Swift 5.0.x / bottle
+      osx_image: xcode10.3
 
     - <<: *macOS
-      name: macOS / Swift 5.1.x
+      name: macOS 10.14.4 / Swift 5.1.x / bottle
       osx_image: xcode11
 
     - <<: *macOS
-      name: macOS / Swift 5.0.x / --force-bottle
-      osx_image: xcode10.2
-      script: |
-        echo fail > $(brew --cache --build-from-source ./swift-sh.rb)
+      name: macOS 10.13.6 / Swift 5.0.x / `--force-bottle` fails
+      osx_image: xcode10.1
+      script:
+        - echo fail > $(brew --cache --build-from-source ./swift-sh.rb)
         # ^^ because the install will still *try* to build from source, so if that happens this will fail that attempt
-        brew install ./swift-sh.rb --force-bottle
+        - brew install ./swift-sh.rb --force-bottle && false || true
+
+    - <<: *macOS
+      name: macOS 10.14.4 / Swift 5.0.x / `--force-bottle` succeeds
+      osx_image: xcode10.3
+      script:
+        - echo fail > $(brew --cache --build-from-source ./swift-sh.rb)
+        # ^^ because the install will still *try* to build from source, so if that happens this will fail that attempt
+        - brew install ./swift-sh.rb --force-bottle
 
     - &linux
       name: Linux / Swift 4.2.4
@@ -43,6 +54,14 @@ jobs:
         /home/linuxbrew/.linuxbrew/bin/brew install ./swift-sh.rb --verbose
 
     - <<: *linux
-      name: Linux / Swift 5.0.0
-      env: SWIFT_VERSION=5.0
-      
+      name: Linux / Swift 5.0.3
+      env: SWIFT_VERSION=5.0.3
+
+    - <<: *linux
+      name: Linux / Swift 5.1.3
+      env: SWIFT_VERSION=5.1.3
+
+  # Doesn‘t work currently
+  # - <<: *linux
+  #   name: Linux / Swift 5.2-dev
+  #   env: SWIFT_VERSION=DEVELOPMENT-SNAPSHOT-2020-01-13-a
