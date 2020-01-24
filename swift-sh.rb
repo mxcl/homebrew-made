@@ -35,7 +35,7 @@ class SwiftSh < Formula
   pour_bottle? do
     reason "The bottle requires a Swift ABI stable version of macOS"
     satisfy do
-      MacOS.version >= '10.14.4'
+      MacOS.full_version >= '10.14.4'
     end
   end
 end
