@@ -25,6 +25,7 @@ class SwiftSh < Formula
   def swift_abi_safe
     # Swift 5 is ABI safe since Xcode 10.2-beta3
     return false unless OS.mac?
+    return true if MacOS.version >= 11
     return false unless MacOS.full_version >= '10.14.4'
     # this check is redundant really, but we’re just being careful
     return false unless File.file? "/usr/lib/swift/libswiftFoundation.dylib"
