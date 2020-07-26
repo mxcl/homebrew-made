@@ -5,8 +5,8 @@ jobs:
   include:
     - &macOS
       os: osx
-      osx_image: xcode10.1
-      name: macOS 10.13.6 / Swift 4.2.1 / no-bottle
+      osx_image: xcode11.3
+      name: macOS 10.14.4 / Swift 5.1.3 / bottle
       script:
         - brew install ./swift-sh.rb
         # Verify the resulting tool is functional
@@ -14,14 +14,14 @@ jobs:
       env:
         - HOMEBREW_NO_AUTO_UPDATE=1
         - HOMEBREW_NO_INSTALL_CLEANUP=1
-
+    
     - <<: *macOS
-      name: macOS 10.14.4 / Swift 5.0.x / bottle
-      osx_image: xcode10.3
-
+      name: macOS 10.14.4 / Swift 5.2.4 / bottle
+      osx_image: xcode11.6
+    
     - <<: *macOS
-      name: macOS 10.14.4 / Swift 5.1.x / bottle
-      osx_image: xcode11
+      name: macOS 10.14.4 / Swift 5.3.0 / bottle
+      osx_image: xcode12
 
     - <<: *macOS
       name: macOS 10.13.6 / Swift 5.0.x / `--force-bottle` fails
@@ -40,9 +40,9 @@ jobs:
         - brew install ./swift-sh.rb --force-bottle
 
     - &linux
-      name: Linux / Swift 4.2.4
+      name: Linux / Swift 5.1.3
+      env: SWIFT_VERSION=5.1.3
       os: linux
-      env: SWIFT_VERSION=4.2.4
       before_install: |
         curl "https://swift.org/builds/swift-$SWIFT_VERSION-release/ubuntu1604/swift-$SWIFT_VERSION-RELEASE/swift-$SWIFT_VERSION-RELEASE-ubuntu16.04.tar.gz" | sudo tar xz -C / --strip-components=1
         sudo chmod a+r /usr/lib/swift/CoreFoundation/*
@@ -54,14 +54,5 @@ jobs:
         /home/linuxbrew/.linuxbrew/bin/brew install ./swift-sh.rb --verbose
 
     - <<: *linux
-      name: Linux / Swift 5.0.3
-      env: SWIFT_VERSION=5.0.3
-
-    - <<: *linux
-      name: Linux / Swift 5.1.3
-      env: SWIFT_VERSION=5.1.3
-
-  # Doesn‘t work currently
-  # - <<: *linux
-  #   name: Linux / Swift 5.2-dev
-  #   env: SWIFT_VERSION=DEVELOPMENT-SNAPSHOT-2020-01-13-a
+      name: Linux / Swift 5.2.4
+      env: SWIFT_VERSION=5.2.4
