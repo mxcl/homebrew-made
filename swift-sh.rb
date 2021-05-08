@@ -6,8 +6,8 @@ class SwiftSh < Formula
 
   bottle do
     root_url "https://github.com/mxcl/swift-sh/releases/download/2.2.0"
-    cellar :any_skip_relocation
-    sha256 "8bee3e8bcc0c3d9b05499c0b2e6622ef2200ed2f3c72707123261d47fd4d34d7" => :mojave
+    sha256 cellar: :any_skip_relocation
+    sha256 mojave: "8bee3e8bcc0c3d9b05499c0b2e6622ef2200ed2f3c72707123261d47fd4d34d7"
   end
 
   def install
