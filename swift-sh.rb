@@ -2,13 +2,7 @@ class SwiftSh < Formula
   desc "Scripting with easy zero-conf dependency imports"
   homepage "https://github.com/mxcl/swift-sh"
   url "https://github.com/mxcl/swift-sh/archive/2.2.0.tar.gz"
-  sha256 ""
-
-  bottle do
-    root_url "https://github.com/mxcl/swift-sh/releases/download/2.2.0"
-    sha256 cellar: :any_skip_relocation
-    sha256 mojave: "8bee3e8bcc0c3d9b05499c0b2e6622ef2200ed2f3c72707123261d47fd4d34d7"
-  end
+  sha256 "e3204b3bf727ca27c951080c5eb90b1e193fa8fef0703f60ea068bdb57f39df4"
 
   def install
     args = ["swift", "build",
@@ -31,12 +25,5 @@ class SwiftSh < Formula
     return false unless File.file? "/usr/lib/swift/libswiftFoundation.dylib"
     `swift --version` =~ /Swift version (\d+)\.\d+/
     $1.to_i >= 5
-  end
-
-  pour_bottle? do
-    reason "The bottle requires a Swift ABI stable version of macOS"
-    satisfy do
-      MacOS.full_version >= '10.14.4'
-    end
   end
 end
