@@ -1,0 +1,13 @@
+on: push
+jobs:
+  ci:
+    strategy:
+      matrix:
+        os:
+        - ubuntu-latest
+        - macos-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v2
+    - run: brew install ./swift-sh.rb
+    - run: swift sh <(curl https://raw.githubusercontent.com/mxcl/swift-sh/master/Examples/cards)
