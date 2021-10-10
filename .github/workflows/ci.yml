@@ -9,5 +9,5 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
-    - run: brew install ./swift-sh.rb
+    - run: brew install ./swift-sh.rb --env=std
     - run: swift sh <(curl https://raw.githubusercontent.com/mxcl/swift-sh/master/Examples/cards)
