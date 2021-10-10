@@ -5,7 +5,7 @@ class SwiftSh < Formula
   sha256 "512ab6ba0899258673e040fa434a2ee4332128eb6ae47f63b146477667ea2d83"
 
   # brew devs suck nowadays
-  env: std
+  env :std
 
   def install
     args = ["swift", "build",
