@@ -1,8 +1,8 @@
 class GitCryobank < Formula
   desc "Archive Git repositories over SSH and browse them on the web"
   homepage "https://github.com/mxcl/git-cryobank"
-  url "https://github.com/mxcl/git-cryobank/archive/refs/tags/v0.2.0.tar.gz"
-  sha256 "981ec22d17f5f9ab49d63450303e5b9d3b3028f8532ba0c9ab78cd3021020730"
+  url "https://github.com/mxcl/git-cryobank/archive/refs/tags/v0.3.0.tar.gz"
+  sha256 "2b93460c823528f61f8955d46a93721ee738e4fc56779167ed8d143ea5ad2406"
 
   depends_on "go" => :build
 
