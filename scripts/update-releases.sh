@@ -15,6 +15,12 @@ checksum() {
   "${api[@]}" "$1" | shasum -a 256 | cut -d ' ' -f 1
 }
 
+cryobank_release=$(release mxcl/git-cryobank)
+cryobank_tag=$(jq -r '.tag_name' <<<"$cryobank_release")
+cryobank_url="https://github.com/mxcl/git-cryobank/archive/refs/tags/$cryobank_tag.tar.gz"
+cryobank_sha=$(checksum "$cryobank_url")
+perl -0pi -e "s#url \"https://github.com/mxcl/git-cryobank/archive/refs/tags/[^\"]+\"\n  sha256 \"[^\"]+\"#url \"$cryobank_url\"\n  sha256 \"$cryobank_sha\"#" "$root/git-cryobank.rb"
+
 swift_release=$(release mxcl/swift-sh)
 swift_version=$(jq -r '.tag_name | sub("^v"; "")' <<<"$swift_release")
 swift_url="https://github.com/mxcl/swift-sh/archive/refs/tags/$swift_version.tar.gz"
