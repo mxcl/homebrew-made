@@ -7,6 +7,8 @@ class SwiftSh < Formula
   # brew devs suck nowadays
   env :std unless OS.mac?
 
+  depends_on "swift" => :build unless OS.mac?
+
   def install
     system "swift", "build", "--configuration", "release", "--disable-sandbox"
 
