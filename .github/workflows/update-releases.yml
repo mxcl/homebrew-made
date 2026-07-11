@@ -1,7 +1,6 @@
 name: Update releases
 
 on:
-  push:
   schedule:
     - cron: "15 * * * *"
   workflow_dispatch:
