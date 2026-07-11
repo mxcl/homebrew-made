@@ -22,7 +22,8 @@ jobs:
         run: scripts/update-releases.sh
       - name: Validate
         run: |
-          brew style swift-sh.rb Casks/package-manager-manager.rb
+          ruby -c swift-sh.rb
+          brew style Casks/package-manager-manager.rb
           git diff --check
       - name: Commit updates
         run: |
