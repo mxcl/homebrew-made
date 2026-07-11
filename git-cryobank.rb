@@ -11,6 +11,6 @@ class GitCryobank < Formula
   end
 
   test do
-    assert_match "git cryobank HOST", shell_output("#{bin}/git-cryobank --help")
+    assert_match "git cryobank [PATH]", shell_output("#{bin}/git-cryobank --help")
   end
 end
