@@ -1,13 +1,38 @@
-on: push
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
 jobs:
-  ci:
+  test:
     strategy:
+      fail-fast: false
       matrix:
-        os:
-        - ubuntu-latest
-        - macos-latest
+        os: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
-    - uses: actions/checkout@v2
-    - run: brew install ./swift-sh.rb
-    - run: swift sh <(curl https://raw.githubusercontent.com/mxcl/swift-sh/master/Examples/cards)
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@1f8e202ffddf94def7f42f6fa3a482e821489f9c # 2026.07.10.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Cache Homebrew Bundler RubyGems
+        uses: actions/cache@v5
+        with:
+          path: ${{ steps.set-up-homebrew.outputs.gems-path }}
+          key: ${{ matrix.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
+          restore-keys: ${{ matrix.os }}-rubygems-
+
+      - run: brew test-bot --only-cleanup-before
+      - run: brew test-bot --only-setup
+      - run: brew test-bot --only-tap-syntax
+
+      - name: Build and test every formula
+        run: |
+          formulae=$(brew tap-info --json mxcl/made | jq -r '.[0].formula_names | join(",")')
+          brew test-bot --only-formulae --skip-dependents --testing-formulae="$formulae"
