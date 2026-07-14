@@ -1,6 +1,6 @@
 cask "clawlicious" do
-  version "1.1.0"
-  sha256 "8be2db1469f24e50d052e7acaf7aab064b42eb85aa578122c5d53baa8675616d"
+  version "1.2.0"
+  sha256 "65d7eeab52680e02e8ce7078dc5cc866e8dbb6ca5a4e288cf131b2a76d0bbcb7"
 
   url "https://github.com/mxcl/clawlicious/releases/download/v#{version}/clawlicious-#{version}.dmg"
   name "Clawlicious"
