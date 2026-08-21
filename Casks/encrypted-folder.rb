@@ -8,7 +8,7 @@ cask "encrypted-folder" do
   homepage "https://github.com/mxcl/encrypted-folder"
 
   depends_on arch: :arm64
-  depends_on macos: ">= :sequoia"
+  depends_on macos: :sequoia
 
   app "Encrypted Folder.app"
 end
