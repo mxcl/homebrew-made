@@ -34,3 +34,10 @@ pmm_url=$(jq -r --arg version "${pmm_version}" '.assets[] | select(.name == "pac
 [[ -n ${pmm_url} ]]
 pmm_sha=$(checksum "${pmm_url}")
 perl -0pi -e "s/version \"[^\"]+\"\n  sha256 \"[^\"]+\"/version \"${pmm_version}\"\n  sha256 \"${pmm_sha}\"/" "${root}/Casks/package-manager-manager.rb"
+
+encrypted_folder_release=$(release mxcl/encrypted-folder)
+encrypted_folder_version=$(jq -r '.tag_name | sub("^v"; "")' <<<"${encrypted_folder_release}")
+encrypted_folder_url=$(jq -r --arg version "${encrypted_folder_version}" '.assets[] | select(.name == "Encrypted-Folder-\($version).dmg") | .browser_download_url' <<<"${encrypted_folder_release}")
+[[ -n ${encrypted_folder_url} ]]
+encrypted_folder_sha=$(checksum "${encrypted_folder_url}")
+perl -0pi -e "s/version \"[^\"]+\"\n  sha256 \"[^\"]+\"/version \"${encrypted_folder_version}\"\n  sha256 \"${encrypted_folder_sha}\"/" "${root}/Casks/encrypted-folder.rb"
