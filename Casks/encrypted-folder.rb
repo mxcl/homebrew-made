@@ -1,6 +1,6 @@
 cask "encrypted-folder" do
-  version "1.0.0"
-  sha256 "fa7daa7d165bf6b6eb7307957a6bae954bacf341531d6003e8578d21e3994439"
+  version "1.1.0"
+  sha256 "c9f43390f87f84ab88919a3c285233a1876b544aa08aa860c789297f0a8ff625"
 
   url "https://github.com/mxcl/encrypted-folder/releases/download/v#{version}/Encrypted-Folder-#{version}.dmg"
   name "Encrypted Folder"
