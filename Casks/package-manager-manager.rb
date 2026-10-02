@@ -1,6 +1,6 @@
 cask "package-manager-manager" do
-  version "0.26.0"
-  sha256 "d06e5f118c181da6a1056411eded84fc03d605a8ee53559e9b912e46e73d03a2"
+  version "0.27.0"
+  sha256 "3fc2c1e8d8814438025a6c8323ae894153a189c80740a74fcc4ba4a0dcf1ae59"
 
   url "https://github.com/mxcl/package-manager-manager/releases/download/v#{version}/package-manager-manager-#{version}.dmg"
   name "Package Manager Manager"
